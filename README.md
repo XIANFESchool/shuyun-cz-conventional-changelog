@@ -23,7 +23,9 @@ npm install -D shuyunxianfeschool/shuyun-cz-conventional-changelog
 
 - 使用 `git cz` 代替 `git commit`
 
+![image](https://raw.githubusercontent.com/ShuyunXIANFESchool/shuyun-cz-conventional-changelog/master/gitcz.gif)
+
 - 说明
     - 如果是故事卡, 请选择story
     - 如果是bugfix, 请选择bug
-    - 如果是普通提交, 请选择commit
+    - 如果是普通提交, 请选择commt
