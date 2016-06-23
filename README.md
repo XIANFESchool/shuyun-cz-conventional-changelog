@@ -12,7 +12,7 @@ npm install -g commitizen
 npm install -D shuyunxianfeschool/shuyun-cz-conventional-changelog
 ```
 
-- 如果是NodeJS项目, 在package.json中添加
+- 如果是NodeJS项目, 在package.json中添加 (如果没有package.json, 请参考这个[conventional-commit-messages-as-a-global-utility](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility))
 ```js
 "config": {
     "commitizen": {
