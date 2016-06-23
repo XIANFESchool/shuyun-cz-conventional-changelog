@@ -35,46 +35,34 @@ module.exports = {
         message: 'Select the type of change that you\'re committing:',
         choices: [
         {
-          name: 'feat:     A new feature',
-          value: 'feat'
+          name: 'story:      故事卡',
+          value: 'story'
         }, {
-          name: 'fix:      A bug fix',
-          value: 'fix'
+          name: 'bug:      bug fix',
+          value: 'bug'
         }, {
-          name: 'docs:     Documentation only changes',
-          value: 'docs'
-        }, {
-          name: 'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)',
-          value: 'style'
-        }, {
-          name: 'refactor: A code change that neither fixes a bug or adds a feature',
-          value: 'refactor'
-        }, {
-          name: 'perf:     A code change that improves performance',
-          value: 'perf'
-        }, {
-          name: 'test:     Adding missing tests',
-          value: 'test'
-        }, {
-          name: 'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation',
-          value: 'chore'
-        }]
+          name: 'commit:      普通提交',
+          value: 'commit'
+          }]
       }, {
         type: 'input',
         name: 'scope',
-        message: 'Denote the scope of this change ($location, $browser, $compile, etc.):\n'
+        message: 'Jira Issue ID(s) 或者 输入一个普通提交信息 (required):\n',
+        validate: function(input) {
+          if (!input) {
+            return '必须输入一个Jira Issue ID(s) 或者 输入一个普通提交信息';
+          } else {
+            return true;
+          }
+        }
       }, {
         type: 'input',
         name: 'subject',
-        message: 'Write a short, imperative tense description of the change:\n'
+        message: '对Jira Issue ID(s)的一个简单描述(小于100字):\n'
       }, {
         type: 'input',
         name: 'body',
-        message: 'Provide a longer description of the change:\n'
-      }, {
-        type: 'input',
-        name: 'footer',
-        message: 'List any breaking changes or issues closed by this change:\n'
+        message: '详细描述(如果有):\n'
       }
     ]).then(function(answers) {
 
@@ -89,16 +77,17 @@ module.exports = {
 
       // parentheses are only needed when a scope is present
       var scope = answers.scope.trim();
-      scope = scope ? '(' + answers.scope.trim() + ')' : '';
+      scope = scope ? '[' + answers.scope.trim() + ']' : '';
 
       // Hard limit this line
       var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
 
       // Wrap these lines at 100 characters
-      var body = wrap(answers.body, wrapOptions);
-      var footer = wrap(answers.footer, wrapOptions);
+      var body = answers.body.trim();
+      body = body ? '详细描述: \n' + answers.body.trim() : ''
+      var body = wrap(body, wrapOptions);
 
-      commit(head + '\n\n' + body + '\n\n' + footer);
+      commit(head + '\n' + body);
     });
   }
 }
