@@ -36,13 +36,13 @@ module.exports = {
         choices: [
         {
           name: 'story:      故事卡',
-          value: 'story'
+          value: 'STORY'
         }, {
           name: 'bug:      bug fix',
-          value: 'bug'
+          value: 'BUG'
         }, {
           name: 'commit:      普通提交',
-          value: 'commit'
+          value: 'COMMIT'
           }]
       }, {
         type: 'input',
@@ -84,7 +84,7 @@ module.exports = {
 
       // Wrap these lines at 100 characters
       var body = answers.body.trim();
-      body = body ? '详细描述: \n' + answers.body.trim() : ''
+      body = body ? '\n详细描述: ' + answers.body.trim() : ''
       var body = wrap(body, wrapOptions);
 
       commit(head + '\n' + body);
