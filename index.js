@@ -47,7 +47,7 @@ module.exports = {
       }, {
         type: 'input',
         name: 'scope',
-        message: 'Jira Issue ID(s) 或者 输入一个普通提交信息 (required):\n',
+        message: 'Jira Issue ID(s) 或者 输入一个普通提交信息 (必填):\n',
         validate: function(input) {
           if (!input) {
             return '必须输入一个Jira Issue ID(s) 或者 输入一个普通提交信息';
@@ -62,7 +62,7 @@ module.exports = {
       }, {
         type: 'input',
         name: 'body',
-        message: '详细描述(如果有):\n'
+        message: '详细描述(可选):\n'
       }
     ]).then(function(answers) {
 
@@ -81,6 +81,11 @@ module.exports = {
 
       // Hard limit this line
       var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
+      if(answers.type === 'COMMIT') {
+          var subject = answers.subject.trim();
+          subject = subject ? ' - ' + answers.subject.trim() : '';
+          head = (answers.type + ': ' + scope + ' - ' + subject).slice(0, maxLineWidth);
+      }
 
       // Wrap these lines at 100 characters
       var body = answers.body.trim();
