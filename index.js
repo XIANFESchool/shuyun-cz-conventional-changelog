@@ -84,7 +84,7 @@ module.exports = {
       if(answers.type === 'COMMIT') {
           var subject = answers.subject.trim();
           subject = subject ? ' - ' + answers.subject.trim() : '';
-          head = (answers.type + ': ' + scope + ' - ' + subject).slice(0, maxLineWidth);
+          head = (answers.type + ': ' + answers.scope.trim() + ' - ' + subject).slice(0, maxLineWidth);
       }
 
       // Wrap these lines at 100 characters
