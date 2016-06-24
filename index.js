@@ -34,15 +34,15 @@ module.exports = {
         name: 'type',
         message: 'Select the type of change that you\'re committing:',
         choices: [
-        {
-          name: 'story:      故事卡',
-          value: 'STORY'
-        }, {
-          name: 'bug:      bug fix',
-          value: 'BUG'
-        }, {
-          name: 'commit:      普通提交',
-          value: 'COMMIT'
+          {
+            name: 'story:      故事卡',
+            value: 'STORY'
+          }, {
+            name: 'bug:      bug fix',
+            value: 'BUG'
+          }, {
+            name: 'commit:      普通提交',
+            value: 'COMMIT'
           }]
       }, {
         type: 'input',
@@ -50,7 +50,7 @@ module.exports = {
         message: 'Jira Issue ID(s) 或者 输入一个普通提交信息 (必填):\n',
         validate: function(input) {
           if (!input) {
-            return '必须输入一个Jira Issue ID(s) 或者 输入一个普通提交信息';
+            return '必须输入一个Jira Issue ID(s) 或者 输入普通提交信息';
           } else {
             return true;
           }
@@ -58,7 +58,7 @@ module.exports = {
       }, {
         type: 'input',
         name: 'subject',
-        message: '对Jira Issue ID(s)的一个简单描述(小于100字):\n'
+        message: '对Jira Issue ID(s)的一个简单描述(必填) 普通提交可直接回车跳过:\n'
       }, {
         type: 'input',
         name: 'body',
@@ -82,9 +82,9 @@ module.exports = {
       // Hard limit this line
       var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
       if(answers.type === 'COMMIT') {
-          var subject = answers.subject.trim();
-          subject = subject ? ' - ' + answers.subject.trim() : '';
-          head = (answers.type + ': ' + answers.scope.trim() + ' - ' + subject).slice(0, maxLineWidth);
+        var subject = answers.subject.trim();
+        subject = subject ? ' - ' + answers.subject.trim() : '';
+        head = (answers.type + ': ' + answers.scope.trim() + subject).slice(0, maxLineWidth);
       }
 
       // Wrap these lines at 100 characters
