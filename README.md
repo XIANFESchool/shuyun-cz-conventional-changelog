@@ -29,3 +29,4 @@ npm install -D shuyunxianfeschool/shuyun-cz-conventional-changelog
     - 如果是故事卡, 请选择story
     - 如果是bugfix, 请选择bug
     - 如果是普通提交, 请选择commt
+    - :star: commitizen 底层使用的是 [Inquirer.js](https://github.com/SBoudrias/Inquirer.js), 更多写法, 可以参考它的 README
