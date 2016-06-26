@@ -1,6 +1,6 @@
 {
   "name": "shuyun-cz-conventional-changelog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "copy from https://github.com/commitizen/cz-conventional-changelog",
   "main": "index.js",
   "scripts": {
